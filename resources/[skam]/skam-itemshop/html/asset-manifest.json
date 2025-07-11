@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "./static/css/main.0e1b70cf.css",
+    "main.js": "./static/js/main.f737f837.js",
+    "static/media/caseopened.mp3": "./static/media/caseopened.bad154bb308c28fee8b5.mp3",
+    "static/media/upgradersuccess.mp3": "./static/media/upgradersuccess.e11be175091c7df3b3cb.mp3",
+    "static/media/upgraderfail.mp3": "./static/media/upgraderfail.779b7ae911d326472144.mp3",
+    "static/media/caseclick.mp3": "./static/media/caseclick.ea77e01d19a3b62674a4.mp3",
+    "index.html": "./index.html",
+    "main.0e1b70cf.css.map": "./static/css/main.0e1b70cf.css.map",
+    "main.f737f837.js.map": "./static/js/main.f737f837.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e1b70cf.css",
+    "static/js/main.f737f837.js"
+  ]
+}

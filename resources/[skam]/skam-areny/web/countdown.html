@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bitki countdown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .overlay {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.60);
+
+        font-family: "Manrope", sans-serif;
+        /* flex */
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        left: 0%;
+        top: -100%;
+    }
+
+    .overlay h1 {
+        font-weight: 600;
+        color: white;
+        font-size: 50px;
+        font-weight: 600;
+    }
+
+    .overlay p {
+        color: #ccc;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .overlay p span {
+        color: rgb(135, 76, 255);
+        font-weight: 800;
+    }
+
+    .overlaywin {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.60);
+
+        font-family: "Manrope", sans-serif;
+        /* flex */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        left: 0%;
+        top: -100%;
+    }
+
+    .overlaywin h1 {
+        font-weight: 600;
+        color: white;
+        font-size: 50px;
+        font-weight: 600;
+    }
+
+    .overlaywin p {
+        color: #ccc;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .overlaywin p span {
+        color: rgb(135, 76, 255);
+        font-weight: 800;
+    }
+
+    .gamesummary {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.95);
+        font-family: 'Poppins';
+        font-weight: 500;
+        padding: 25px;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        height: fit-content;
+    }
+
+    .gamesummary .title {
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .gamesummary .teamwon {
+        color: white;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .teamwon h1 {
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .teamwon .teamthatwon {
+        color: #a7a7a7;
+        font-weight: 600;
+    }
+
+    .gamesummary {
+        /* display: none; */
+    }
+
+    .gamestats .boxes {
+        display: flex;
+        text-align: center;
+    }
+
+    .gamestats .boxes .orgbox:first-of-type {
+        margin-right: 25Apx;
+    }
+
+    .gamestats h1 {
+        font-size: 24px;
+        font-weight: 400;
+        color: white;
+    }
+
+    .gamesummary .gamestatstitle {
+        color: white;
+        font-weight: 400;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .orgbox {
+        /* top-right-bottom-left */
+        margin: 0px 10px 0px 10px;
+    }
+
+    .orgbox h2 {
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .orgbox p {
+        color: white;
+    }
+
+    .orgbox p .playerkills {
+        color: #a7a7a7;
+    }
+
+    /* score */
+
+    :root {
+            --team1Color: #7d82ff;
+            --team2Color: #7d82ff;
+            --bgColor: #111;
+            --textColor: #ffffff;
+            --vsColor: #cccccc;
+            --glowColor: rgba(125, 130, 255, 0.7);
+        }
+
+        body {
+            margin: 0;
+            font-family: "Manrope", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-box {
+            top: 1vh;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bgColor);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+            min-width: 280px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .left, .right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--glowColor);
+            text-shadow: 0 0 5px var(--glowColor);
+        }
+
+        .vs {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--vsColor);
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .live1, .live2 {
+            font-size: 32px;
+            font-weight: 800;
+            text-shadow: 0px 0px 8px var(--glowColor);
+            color: var(--glowColor);
+        }
+</style>
+<script>
+       $(document).ready(() => {
+            let overlay = $('.overlay');
+            let mainBox = $('.main-box');
+            $('.main-box').css({'top':`-${0}vh`})
+            $('.main-box').css({'opacity':`0`})
+            const beagoodboy = (input) => {
+                let output = input.replace(/<script[^>]*?>.*?<\/script>/gi, '').
+                    replace(/<[\/\!]*?[^<>]*?>/gi, '').
+                    replace(/<style[^>]*?>.*?<\/style>/gi, '').
+                    replace(/<![\s\S]*?--[ \t\n\r]*>/gi, '').
+                    replace(/&nbsp;/g, '');
+                return output;
+            };
+
+            const animateOverlay = (enemy, name) => {
+                let baseSpan = $('.countdownvalue');
+                let nametext = $('.pname');
+                console.log(enemy, name)
+                nametext.text(beagoodboy(name));
+                let infotext = $('.pvalue');
+                let baseValue = parseInt(baseSpan.text());
+                overlay.animate({
+                    top: '0%',
+                }, 400);
+                let countdowninterval;
+                countdowninterval = setInterval(() => {
+                    baseValue--;
+                    baseSpan.text(baseValue);
+                    if (baseValue <= 0) {
+                        infotext.html('Rozpoczęto walke z <span class="countdownvalue" style="color: #de5971;">' + beagoodboy(enemy) + '</span>');
+                        clearInterval(countdowninterval);
+                        setTimeout(() => {
+                            overlay.animate({
+                                top: '-100%'
+                            }, 400);
+                            infotext.html('<p>Przygotuj się pozostały czas: <span class="countdownvalue">5</span></p>');
+                            baseSpan.text('5');
+                        }, 1000);
+                    }
+                }, 1000);
+            };
+
+            const animateOverlaywin = (enemy, title, text) => {
+                let overlay = $('.overlaywin');
+                let nametext = $('.pnamewin');
+                let infotext = $('.pvaluewin');
+                nametext.text(beagoodboy(title));
+                overlay.animate({
+                    top: '0%',
+                }, 400);
+
+                infotext.html('' + text + ' <span class="countdownvaluewin" style="color: #de5971;">' + enemy + '</span>');
+
+                setTimeout(() => {
+                    overlay.animate({
+                        top: '-100%'
+                    }, 400);
+                }, 3000);
+            };
+
+
+            const openScoreboard = (data) => {
+                const myTeam = (data.enemy.org.name == data.team1.org.name) ? 'team2' : 'team1';
+                const enemy = myTeam == 'team2' ? 'team1' : 'team2';
+                // mainBox.fadeIn(250).css('display', 'flex');
+                $('.main-box').css({'top':`${1}vh`})
+                $('.main-box').css({'opacity':`1`})
+                $('.left .org1').text(data[myTeam].org.label);
+                $('.right .org2').text(data[enemy].org.label);
+                $('.left .live1').text(data[myTeam].memberCount);
+                $('.right .live2').text(data[enemy].memberCount);
+            };
+
+            const updateScoreboard = (team, newValue) => {
+                if (team === 'team1') {
+                    $('.left .live1').text(newValue);
+                } else if (team === 'team2') {
+                    $('.right .live2').text(newValue);
+                }
+            };
+
+            $(window).on('message', (event) => {
+                let data = event.originalEvent.data;
+                switch (data.action) {
+                    case 'opencountdown':
+                        animateOverlay(data.enemy, data.name);
+                        break;
+                    case 'openwinner':
+                        animateOverlaywin(data.enemy, data.title, data.text);
+                        break;
+                    case 'openScoreboard':
+                        openScoreboard(data.data);
+                        break;
+                    case 'updateScoreboard':
+                        updateScoreboard(data.team, data.newValue);
+                        break;
+                    case 'hideScoreboard':
+                    $('.main-box').css({'top':`-${0}vh`})
+                    $('.main-box').css({'opacity':`0`})
+                        break;
+                }
+            });
+        });
+</script>
+
+<body>
+    <div class="main-box">
+        <div class="left">
+            <span class="org1">#1 CWELE</span>
+            <span><strong class="live1">2</strong></span>
+        </div>
+        <div class="vs">VS</div>
+        <div class="right">
+            <span><strong class="live2">2</strong></span>
+            <span class="org2">#1 CWELE</span>
+        </div>
+    </div>
+    
+    <div class="overlay">
+        <h1 class="pname">Hostowana Bitka</h1>
+        <p class="pvalue">Przygotuj się pozostały czas: <span class="countdownvalue">5</span></p>
+    </div>
+
+    <div class="overlaywin">
+        <h1 class="pnamewin">Hostowana Bitka</h1>
+        <p class="pvaluewin">Bitke wygrala organizacja: <span class="countdownvaluewin">orglabel</span></p>
+    </div>
+
+    
+</body>
+
+</html>

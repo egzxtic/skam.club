@@ -1,0 +1,23 @@
+-- RegisterNetEvent('skam:optimize', function(enabled)
+--     if enabled then
+--         SetReducePedModelBudget(true)
+--         SetReduceVehicleModelBudget(true)
+--         SetPedPopulationBudget(0)
+--         SetVehiclePopulationBudget(0)
+--         SetDisableDecalRenderingThisFrame()
+--         SetForcePedFootstepsTracks(false)
+--         SetWeatherTypeNow('CLEAR')
+--         SetTimecycleModifier('yell_tunnel_nodirect')
+--         ClearPedWetness(PlayerPedId())
+--         ClearPedEnvDirt(PlayerPedId())
+--         ResetPedVisibleDamage(PlayerPedId())
+--     else
+--         SetReducePedModelBudget(false)
+--         SetReduceVehicleModelBudget(false)
+--         SetPedPopulationBudget(3)
+--         SetVehiclePopulationBudget(3)
+--         ClearTimecycleModifier()
+--         SetTimecycleModifier()
+--         ClearExtraTimecycleModifier()
+--     end
+-- end)

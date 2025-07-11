@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GRZECHU X MVMNT Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { user-select: none; margin: 0; padding: 0; }
+    body { font-family: 'Red Hat Display', 'Clash', sans-serif; font-weight: 700; color: #FAFAFA; overflow: hidden; }
+    input[type='range'] { -webkit-appearance: none; width: 50vh; height: 0.5vh; background: rgba(5, 5, 5, 0.95); cursor: pointer; border-radius: 9999vh; outline: none; border: solid #222 0.2vh; }
+    input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 1.4vh; height: 1.4vh; background: #FAFAFA; border: solid #999 0.2vh; border-radius: 0.5vh; }
+    .glass { background: rgba(5, 5, 5, 0.95); border: 1px solid #222; border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <iframe class="absolute inset-0 w-full h-full pointer-events-none grayscale" frameborder="0" allow="autoplay" allowfullscreen :src="youtubeSrc" @load="setVolume"></iframe>
+    <div class="absolute inset-0 bg-black bg-opacity-60">
+      <img src="./skamtypography.png" class="absolute top-[47%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80" alt="Logo" />
+      <div class="fixed top-4 left-4 flex gap-4">
+        <button v-for="link in links" @click="openLink(link.url)" class="glass p-3 text-gray-400 hover:text-white transition w-12 h-12 flex items-center justify-center">
+          <i :class="link.icon"></i>
+        </button>
+      </div>
+      <div class="fixed top-4 left-1/2 transform -translate-x-1/2 glass p-3 text-white flex items-center justify-center" style="min-width: 300px;">
+        <i class="fas fa-music text-white text-lg mr-3"></i>
+        <span class="text-white font-bold text-center">{{songs[i].artist}} - {{songs[i].title}}</span>
+      </div>
+      <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 items-center">
+        <button @click="prev" class="glass p-3 text-gray-400 hover:text-white transition w-10 h-10 flex items-center justify-center border border-[#222] rounded-lg"><i class="fas fa-arrow-left text-2xl"></i></button>
+        <input type="range" min="0" max="100" v-model="volume" @input="setVolume" style="width: 20vh; height: 1vh;" />
+        <button @click="next" class="glass p-3 text-gray-400 hover:text-white transition w-10 h-10 flex items-center justify-center border border-[#222] rounded-lg"><i class="fas fa-arrow-right text-2xl"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    Vue.createApp({
+      data: () => ({
+        i: Math.floor(Math.random() * 4),
+        volume: +(localStorage.getItem('volume') || 100),
+        songs: [
+          { id: 'm0V6ZSbjSh4', title: 'Do wzięcia', artist: 'Skumaj ft. Vkie' }, 
+          { id: '216kmBA7hwY', title: 'KOE-L SKYE', artist: 'WANE' }, 
+          { id: 'OF9MeyErYyM', title: 'TENTEN', artist: 'Wenext ft. Młody West, wane, Okekel' }, 
+          { id: '50G7AhxmrKY', title: 'IZOLACJA', artist: 'ADAMSKY' }
+        ],
+        links: [
+          { url: 'https://dc.skam.club', icon: 'fab fa-discord' }, 
+          { url: 'https://www.tiktok.com/@bojowkarp', icon: 'fab fa-tiktok' }, 
+          { url: 'https://indrop.eu/s/skam', icon: 'fas fa-shopping-cart' }
+        ]
+      }),
+      computed: {
+        youtubeSrc() {
+          return `https://www.youtube.com/embed/${this.songs[this.i].id}?autoplay=1&controls=0&loop=1&playlist=${this.songs[this.i].id}&modestbranding=1&showinfo=0&rel=0&enablejsapi=1`
+        }
+      },
+      methods: {
+        prev() {this.i = (this.i - 1 + this.songs.length) % this.songs.length;setTimeout(this.setVolume, 800)},
+        next() {this.i = (this.i + 1) % this.songs.length;setTimeout(this.setVolume, 800)},
+        setVolume() {
+          localStorage.setItem('volume', this.volume);
+          document.documentElement.style.setProperty('--volume', this.volume + '%');
+          const iframe = document.querySelector('iframe');
+          if (iframe?.contentWindow) {const cmd = (f, a = []) => iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: f, args: a }), '*');this.volume === 0 ? cmd('mute') : (cmd('unMute'), cmd('setVolume', [this.volume]));}
+        },
+        openLink(url) { if (window.invokeNative) {window.invokeNative('openUrl', url);} else {window.open(url, '_blank');}}},
+      mounted() { document.documentElement.style.setProperty('--volume', this.volume + '%'); this.setVolume();}
+    }).mount('#app')
+  </script>
+</body>
+</html>

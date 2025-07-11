@@ -1,0 +1,1 @@
+SKAM = exports['skam-markers']:getSharedObject()

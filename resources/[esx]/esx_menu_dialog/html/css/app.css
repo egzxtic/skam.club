@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+	--bg: rgba(10, 10, 10, 0.8);
+    transition: .3s all;
+    font-family: 'Montserrat';
+/* 	color: #fff !important; */
+	border: 0 !important;
+	outline: 0 !important;
+}
+
+.dialog {
+	border-radius: 5px;
+	position: absolute;
+	overflow: hidden;
+	top: 50%;
+	color: #fff;
+	padding:1vh;
+	background: var(--dark-purple, #0c0c0cf1);
+	border: solid 1px #464646;
+	left: 50%;
+	width: 300px;
+	transform: translate(-50%, -50%);
+}
+
+
+
+.dialog.big {
+	height: 200px;
+}
+
+
+
+.dialog .head {
+
+  display: flex;
+
+  align-items: center;
+
+  text-align: center;
+
+  color: #ffffff;
+
+  letter-spacing: 2px;
+
+/*   margin-bottom: 10px; */
+
+}
+
+
+
+.head::before,
+
+.head::after {
+
+  content: '';
+
+  flex: 1;
+
+  border-bottom: 1px solid #ffffff;
+
+}
+
+
+
+.head:not(:empty)::before {
+
+  margin-right: .95em;
+
+}
+
+
+
+.head:not(:empty)::after {
+
+  margin-left: .95em;
+
+}
+
+
+
+.dialog input[type="text"] {
+
+	text-align: center;
+
+		color: #fff;
+
+	border-top-left-radius: 5px;
+
+	border-top-right-radius: 5px;
+
+	background-color: transparent;
+
+	width: 100%;
+
+	height: 32px;
+
+}
+
+
+
+.dialog textarea {
+
+	text-align: center;
+
+	border-top-left-radius: 5px;
+
+	border-top-right-radius: 5px;
+
+	width: 100%;
+
+	height: 32px;
+
+}
+
+
+
+.dialog button[name="submit"],
+
+.dialog button[name="cancel"] {
+
+	background-color: transparent;
+
+	color: #fff;
+
+	width: 49%;
+
+	height: 33px;
+
+}
+
+
+
+.dialog button[name="submit"] {
+
+	border-radius: .5vh;
+
+	margin: .1vh;
+
+}
+
+
+
+.dialog button[name="cancel"] {
+
+	border-radius: .5vh;
+
+	margin: .1vh;
+
+}
+
+
+
+.dialog button:hover {
+
+	background-color: rgba(100, 100, 100, 0.8) !important;
+
+}

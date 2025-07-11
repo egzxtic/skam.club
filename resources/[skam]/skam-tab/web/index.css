@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root {
+    --servercolor: #FAFAFA;
+    --border-radius: #222;
+    --background: #050505F2;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #FAFAFA;
+    margin: 0;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.container {
+    position: absolute;
+    left: 1vh;
+    bottom: 22vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+.tab-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 27vh;
+    min-height: 30vh;
+    max-height: 30vh;
+    border: 1px solid var(--border-radius);
+    border-radius: 0.5vh;
+    padding-top: 3vh;
+    padding-bottom: 1.1vh;
+    background: var(--background);
+    opacity: 0;
+    transform: translateY(10px);
+    animation-duration: 0.3s; 
+    animation-fill-mode: forwards;
+    pointer-events: auto; 
+    transition: all 0.2s ease-out; 
+} 
+
+.tab-box.show-animation {
+    opacity: 1;
+    display: flex;
+    animation-name: fadeInUp;
+    transform: translateY(0);
+}
+
+.tab-box.hide-animation {
+    animation-name: fadeOutDown;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+.panel {
+    position: relative;
+    width: 25vh;
+    height: 4.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
+    border: 1px solid var(--border-radius);
+    border-radius: 0.5vh;
+    margin-bottom: 0.1vh;
+    opacity: 0;
+    transform: translateX(-5px);
+    animation: slideInPanel 0.2s forwards;
+    animation-delay: calc(var(--panel-index, 0) * 0.05s); 
+}
+
+#panels-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4vh;
+    align-items: center;
+}
+
+.tab-info-add {
+    position: absolute;
+    top: 1%;
+    font-size: 1.2vh;
+    font-weight: 600;
+    color: var(--servercolor);
+}
+
+.title {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    left: 22%;
+    top: 5%;
+    width: 10vh;
+    height: 2.5vh;
+    font-weight: 700;
+    font-size: 1.2vh;
+    color: var(--servercolor);
+}
+
+.desc {
+    position: absolute;
+    width: 20vh;
+    height: 2.4vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    left: 22%;
+    top: 40%;
+    color: rgba(200, 200, 200, 0.5);
+    font-size: 1vh;
+    font-weight: 300;
+}
+
+.panel i {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 5%;
+    width: 3vh;
+    height: 3vh;
+    border-radius: 0.5vh;
+    font-size: 1.5vh;
+    font-weight: 300;
+    color: var(--servercolor);
+    background-color: var(--background);
+}
+
+.tab {
+    font-weight: 600;
+    color: var(--servercolor);
+}
+
+.tab-open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25vh;
+    height: 2vw;
+    font-size: 0.7vw;
+    pointer-events: none;
+    opacity: 1;
+}
+
+@keyframes slideInPanel {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.panel:hover, .tab-open:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+span {
+    font-size: 1vh;
+    font-weight: 300;
+}
