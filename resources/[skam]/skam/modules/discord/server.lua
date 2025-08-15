@@ -1,6 +1,6 @@
 discordData = {
-    botTkn = 'MTM2NTUyMjQ1NTQ0NzIwODA5Ng.GjUr-H.2i_wPFzpl1AhKlZ2ru8tavUl1UTJGys152WVDc',
-    guildId = '913692176540655627'
+    botTkn = 'CHANGE-ME',
+    guildId = 'CHANGE-ME'
 }
 
 discordRoles = {
